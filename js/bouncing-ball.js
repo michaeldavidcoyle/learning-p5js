@@ -7,6 +7,7 @@ let ySpeed = 10;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
+    canvas.style.display = 'block';
 }
 
 function draw() {
