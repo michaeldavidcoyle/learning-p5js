@@ -2,7 +2,8 @@ let x = 100;
 let y = Math.round(window.innerHeight / 2);
 let d = window.innerWidth / 16;
 let r = d / 2;
-let xSpeed = Math.round(window.innerWidth / 100);
+let xSpeed = 10;
+let ySpeed = 10;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
@@ -16,8 +17,13 @@ function draw() {
     circle(x, y, d);
 
     x += xSpeed;
+    y += ySpeed;
 
     if (x - r < 0 || x + r > width) {
         xSpeed *= -1;
+    }
+
+    if (y - r < 0 || y + r > height) {
+        ySpeed *= -1;
     }
 }
