@@ -4,6 +4,7 @@ let d = window.innerWidth / 16;
 let r = d / 2;
 let xSpeed = 10;
 let ySpeed = 10;
+let gravity = 4;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
@@ -26,5 +27,9 @@ function draw() {
 
     if (y - r < 0 || y + r > height) {
         ySpeed *= -1;
+    }
+
+    if (y + r < height) {
+        ySpeed += gravity;
     }
 }
