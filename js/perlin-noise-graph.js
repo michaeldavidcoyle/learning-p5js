@@ -3,7 +3,8 @@
     https://www.youtube.com/watch?v=y7sgcFhk6ZM
 */
 
-let xOff = 0;
+let start = 0;
+let inc = 0.01;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
@@ -13,13 +14,13 @@ function draw() {
     background(255);
     stroke(0);
     noFill();
+    let xOff = start;
     beginShape();
     for (let x = 0; x < width; x++) {
         let y = noise(xOff) * height;
         vertex(x, y);
-        xOff += 0.01;
+        xOff += inc;
     }
     endShape();
-
-    noLoop();
+    start += inc;
 }
