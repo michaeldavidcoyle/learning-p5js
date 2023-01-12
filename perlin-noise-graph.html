@@ -8,24 +8,37 @@
             margin: 0;
         }
 
-        .controls-offset, .controls-rate {
+        .controls {
+            display: flex;
+        }
+
+        .controls-sample-frequency, .controls-advance-rate, .controls-amplitude {
             padding: 1rem;
             display: flex;
         }
 
-        #offset, #rate {
+        #sample-frequency, #advance-rate, #amplitude {
             margin-left: 0.5rem;
         }
     </style>
     <script src="js/p5.js"></script>
     <script src="js/perlin-noise-graph.js" defer></script>
-    <div class="controls-offset">
-        <label for="offset">offset</label>
-        <input type="number" id="offset" name="offset" value="0.01" min="0.001" max="1" step="0.001"></input>
-    </div>
-    <div class="controls-rate">
-        <label for="rate">rate</label>
-        <input type="number" id="rate" name="rate" value="0.01" min="0.001" max="1" step="0.001"></input>
+    <div class="controls">
+        <div class="controls-sample-frequency">
+            <label for="sample-frequency">sample-frequency</label>
+            <input type="number" id="sample-frequency" name="sample-frequency" value="0.01" min="0.001" max="1"
+                   step="0.001"></input>
+        </div>
+        <div class="controls-amplitude">
+            <label for="amplitude">amplitude</label>
+            <input type="number" id="amplitude" name="amplitude" value="0.5" min="0.01" max="1"
+                   step="0.01"></input>
+        </div>
+        <div class="controls-advance-rate">
+            <label for="advance-rate">advance-rate</label>
+            <input type="number" id="advance-rate" name="advance-rate" value="0.01" min="0.001" max="1"
+                   step="0.001"></input>
+        </div>
     </div>
 
 </head>

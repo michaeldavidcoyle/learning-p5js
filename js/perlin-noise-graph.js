@@ -2,11 +2,14 @@
     Graph of one-dimensional Perlin noise as seen on The Coding Train:
     https://www.youtube.com/watch?v=y7sgcFhk6ZM
 */
-const offset = document.querySelector('#offset');
-const rate = document.querySelector('#rate');
+
+const sampleFrequency = document.querySelector('#sample-frequency');
+const amplitudeInput = document.querySelector('#amplitude');
+const advanceRate = document.querySelector('#advance-rate');
 
 let start = 0;
-let offsetInc = 0.01;
+let frequency = 0.01;
+let amplitude = 0.5;
 let rateInc = 0.01;
 
 function setup() {
@@ -14,24 +17,28 @@ function setup() {
 }
 
 function draw() {
-    background(255);
+    background(239);
     stroke(0);
     noFill();
     let xOff = start;
     beginShape();
     for (let x = 0; x < width; x++) {
-        let y = noise(xOff) * height;
+        let y = noise(xOff) * height * amplitude;
         vertex(x, y);
-        xOff += offsetInc;
+        xOff += frequency;
     }
     endShape();
     start += rateInc;
 }
 
-offset.addEventListener('input', event => {
-    offsetInc = +event.target.value;
+sampleFrequency.addEventListener('input', event => {
+    frequency = +event.target.value;
 });
 
-rate.addEventListener('input', event => {
+amplitudeInput.addEventListener('input', event => {
+    amplitude = +event.target.value;
+})
+
+advanceRate.addEventListener('input', event => {
     rateInc = +event.target.value;
 });
