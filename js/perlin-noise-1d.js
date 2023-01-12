@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-    background(128);
+    background(239);
 
     x = noise(xOff1) * width;
     y = noise(xOff2) * height;
