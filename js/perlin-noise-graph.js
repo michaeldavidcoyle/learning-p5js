@@ -2,12 +2,15 @@
     Graph of one-dimensional Perlin noise as seen on The Coding Train:
     https://www.youtube.com/watch?v=y7sgcFhk6ZM
 */
+const offset = document.querySelector('#offset');
+const rate = document.querySelector('#rate');
 
 let start = 0;
-let inc = 0.01;
+let offsetInc = 0.01;
+let rateInc = 0.01;
 
 function setup() {
-    createCanvas(window.innerWidth, window.innerHeight);
+    createCanvas(window.innerWidth, window.innerHeight * 0.7);
 }
 
 function draw() {
@@ -19,8 +22,16 @@ function draw() {
     for (let x = 0; x < width; x++) {
         let y = noise(xOff) * height;
         vertex(x, y);
-        xOff += inc;
+        xOff += offsetInc;
     }
     endShape();
-    start += inc;
+    start += rateInc;
 }
+
+offset.addEventListener('input', event => {
+    offsetInc = +event.target.value;
+});
+
+rate.addEventListener('input', event => {
+    rateInc = +event.target.value;
+});
