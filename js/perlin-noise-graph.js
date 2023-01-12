@@ -11,9 +11,11 @@ let start = 0;
 let frequency = 0.01;
 let amplitude = 0.5;
 let rateInc = 0.01;
+let halfHeight;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight * 0.7);
+    halfHeight = height / 2;
 }
 
 function draw() {
@@ -21,9 +23,10 @@ function draw() {
     stroke(0);
     noFill();
     let xOff = start;
+    let offset = halfHeight - (halfHeight * amplitude);
     beginShape();
     for (let x = 0; x < width; x++) {
-        let y = noise(xOff) * height * amplitude;
+        let y = noise(xOff) * height * amplitude + offset;
         vertex(x, y);
         xOff += frequency;
     }
