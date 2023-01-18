@@ -24,7 +24,8 @@ let offset1 = 1e4;
 let offset2 = 2e4;
 let offset3 = 3e4;
 let offset4 = 4e4;
-let inc = 0.005;
+let offset5 = 5e5;
+let inc = 0.0025;
 let factor = 1.5;
 
 function setup() {
@@ -44,7 +45,16 @@ function draw() {
 
     noFill();
     stroke(192, 255, 128);
-    bezier(start.x, start.y, cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+    for (let i = -32; i < 32; i++) {
+        let off = noise(offset5) * i * 32;
+        bezier(
+            start.x, start.y + off,
+            cp1.x + off, cp1.y + off,
+            cp2.x + off, cp2.y + off,
+            end.x, end.y + off
+        );
+        offset5 += inc / 100;
+    }
 
     offsetY1 += inc;
     offsetY2 += inc;
