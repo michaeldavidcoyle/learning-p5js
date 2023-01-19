@@ -1,5 +1,4 @@
 let walkers = [];
-let previous;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
