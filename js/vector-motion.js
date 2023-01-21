@@ -2,6 +2,7 @@ let movers = [];
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
+    colorMode(HSL, 360, 100, 100);
 
     for (let i = 0; i < 2; i++) {
         let p = createVector(width / 2 - (i * 100), height / 2);
@@ -36,10 +37,11 @@ function Mover(pos, vel, mass) {
     this.acc = createVector(0, 0);
     this.mass = mass;
     this.r = sqrt(mass) * 10;
+    this.hslValue = map(this.mass, 2, 4, 50, 30);
 
     this.render = () => {
         noStroke();
-        fill(0, 160, 64);
+        fill(128, 100, this.hslValue);
         circle(this.pos.x, this.pos.y, this.r * 2);
     }
 
