@@ -15,10 +15,11 @@ function setup() {
 function draw() {
     background(32);
 
-    let gravity = createVector(0, 3);
+    let gravity = createVector(0, 1);
 
     movers.forEach(mover => {
-        mover.applyForce(gravity);
+        let weight = p5.Vector.mult(gravity, mover.mass);
+        mover.applyForce(weight);
 
         if (mouseIsPressed) {
             let wind = createVector(1, 0);
@@ -52,7 +53,8 @@ function Mover(pos, vel, mass) {
     }
 
     this.applyForce = (force) => {
-        this.acc.add(force);
+        let f = p5.Vector.div(force, this.mass);
+        this.acc.add(f);
     }
 
     this.contain = () => {
