@@ -4,15 +4,22 @@ function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     let p = createVector(width / 2, height / 2);
     // let v = p5.Vector.random2D();
-    let v = createVector(20, -20);
+    let v = createVector(-10, -20);
     // v.setMag(10);
     mover = new Mover(p, v);
 }
 
 function draw() {
     background(32);
+
     let gravity = createVector(0, 3);
     mover.applyForce(gravity);
+
+    if (mouseIsPressed) {
+        let wind = createVector(1, 0);
+        mover.applyForce(wind);
+    }
+
     mover.update();
     mover.contain();
     mover.render();
