@@ -1,35 +1,41 @@
-let mover;
+let movers = [];
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    let p = createVector(width / 2, height / 2);
-    // let v = p5.Vector.random2D();
-    let v = createVector(-10, -20);
-    // v.setMag(10);
-    mover = new Mover(p, v);
+
+    for (let i = 0; i < 2; i++) {
+        let p = createVector(width / 2 - (i * 100), height / 2);
+        let v = createVector(0, 0);
+        let m = i * 2 + 2;
+        movers.push(new Mover(p, v, m));
+    }
 }
 
 function draw() {
     background(32);
 
     let gravity = createVector(0, 3);
-    mover.applyForce(gravity);
 
-    if (mouseIsPressed) {
-        let wind = createVector(1, 0);
-        mover.applyForce(wind);
-    }
+    movers.forEach(mover => {
+        mover.applyForce(gravity);
 
-    mover.update();
-    mover.contain();
-    mover.render();
+        if (mouseIsPressed) {
+            let wind = createVector(1, 0);
+            mover.applyForce(wind);
+        }
+
+        mover.update();
+        mover.contain();
+        mover.render();
+    });
 }
 
-function Mover(pos, vel) {
+function Mover(pos, vel, mass) {
     this.pos = pos;
     this.vel = vel;
     this.acc = createVector(0, 0);
-    this.r = round(min(width, height) * 0.05);
+    this.mass = mass;
+    this.r = sqrt(mass) * 10;
 
     this.render = () => {
         noStroke();
