@@ -3,7 +3,8 @@ let mover;
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     let p = createVector(width / 2, height / 2);
-    let v = createVector(1, 0);
+    let v = p5.Vector.random2D();
+    v.setMag(10);
     mover = new Mover(p, v);
 }
 
@@ -16,7 +17,7 @@ function draw() {
 function Mover(pos, vel) {
     this.pos = pos;
     this.vel = vel;
-    this.r = 32;
+    this.r = round(min(width, height) * 0.05);
 
     this.render = () => {
         noStroke();
@@ -26,5 +27,28 @@ function Mover(pos, vel) {
 
     this.update = () => {
         this.pos.add(this.vel);
+        this.contain();
+    }
+
+    this.contain = () => {
+        if (this.pos.x - this.r < 0) {
+            this.pos.x = this.r;
+            this.vel.x *= -1;
+        }
+
+        if (this.pos.x + this.r > width) {
+            this.pos.x = width - this.r;
+            this.vel.x *= -1;
+        }
+
+        if (this.pos.y - this.r < 0) {
+            this.pos.y = this.r;
+            this.vel.y *= -1;
+        }
+
+        if (this.pos.y + this.r > height) {
+            this.pos.y = height - this.r;
+            this.vel.y *= -1;
+        }
     }
 }
