@@ -5,8 +5,8 @@ function setup() {
     colorMode(HSL, 360, 100, 100);
 
     for (let i = 0; i < 10; i++) {
-        let p = createVector(width / 2 - (i * 100), height / 4);
-        let v = createVector(0, 0);
+        let p = createVector(random(width), random(height / 2));
+        let v = createVector(random(-25, 25), 0);
         let m = i + 1;
         movers.push(new Mover(p, v, m));
     }
