@@ -4,10 +4,10 @@ function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     colorMode(HSL, 360, 100, 100);
 
-    for (let i = 0; i < 2; i++) {
-        let p = createVector(width / 2 - (i * 100), height / 2);
+    for (let i = 0; i < 10; i++) {
+        let p = createVector(width / 2 - (i * 100), height / 4);
         let v = createVector(0, 0);
-        let m = i * 2 + 2;
+        let m = i + 1;
         movers.push(new Mover(p, v, m));
     }
 }
@@ -15,7 +15,7 @@ function setup() {
 function draw() {
     background(32);
 
-    let gravity = createVector(0, 1);
+    let gravity = createVector(0, 3);
 
     movers.forEach(mover => {
         let weight = p5.Vector.mult(gravity, mover.mass);
@@ -26,6 +26,7 @@ function draw() {
             mover.applyForce(wind);
         }
 
+        mover.friction();
         mover.update();
         mover.contain();
         mover.render();
@@ -38,7 +39,7 @@ function Mover(pos, vel, mass) {
     this.acc = createVector(0, 0);
     this.mass = mass;
     this.r = sqrt(mass) * 10;
-    this.hslValue = map(this.mass, 2, 4, 50, 30);
+    this.hslValue = map(this.mass, 1, 10, 50, 10);
 
     this.render = () => {
         noStroke();
@@ -55,6 +56,19 @@ function Mover(pos, vel, mass) {
     this.applyForce = (force) => {
         let f = p5.Vector.div(force, this.mass);
         this.acc.add(f);
+    }
+
+    this.friction = () => {
+        let altitude = height - (this.pos.y + this.r);
+        if (altitude < 1) {
+            let friction = this.vel.copy();
+            friction.normalize();
+            friction.mult(-1);
+            let coefficient = 0.1;
+            let normal = this.mass;
+            friction.setMag(coefficient * normal);
+            this.applyForce(friction);
+        }
     }
 
     this.contain = () => {
