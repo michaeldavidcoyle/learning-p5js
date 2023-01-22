@@ -27,8 +27,8 @@ function Mover(pos, vel, mass) {
 
     this.attract = (mover) => {
         let force = p5.Vector.sub(this.pos, mover.pos);
-        let distanceSq = force.magSq();
-        let G = 100;
+        let distanceSq = constrain(force.magSq(), 25, 2500);
+        let G = 7;
         let strength = G * (this.mass * mover.mass) / distanceSq;
         force.setMag(strength);
         mover.applyForce(force);
