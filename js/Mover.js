@@ -23,6 +23,15 @@ function Mover(pos, vel, mass) {
         this.acc.add(f);
     }
 
+    this.attract = (mover) => {
+        let force = p5.Vector.sub(this.pos, mover.pos);
+        let distanceSq = force.magSq();
+        let G = 1;
+        let strength = G * (this.mass * mover.mass) / distanceSq;
+        force.setMag(strength);
+        mover.applyForce(force);
+    }
+
     this.friction = () => {
         let altitude = height - (this.pos.y + this.r);
         if (altitude < 1) {
