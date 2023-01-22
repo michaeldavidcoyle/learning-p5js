@@ -1,3 +1,5 @@
+// adapted from The Nature of Code by Daniel Shiffman
+
 function Mover(pos, vel, mass) {
     this.pos = pos;
     this.vel = vel;
@@ -26,7 +28,7 @@ function Mover(pos, vel, mass) {
     this.attract = (mover) => {
         let force = p5.Vector.sub(this.pos, mover.pos);
         let distanceSq = force.magSq();
-        let G = 1;
+        let G = 100;
         let strength = G * (this.mass * mover.mass) / distanceSq;
         force.setMag(strength);
         mover.applyForce(force);
