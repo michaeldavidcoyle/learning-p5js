@@ -4,18 +4,14 @@ let sun;
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
 
-    let inside = min(width, height) / 3;
-    let outside = inside + 25;
-
     let p = createVector(0, 0);
     let v = createVector(0, 0);
     sun = new Mover(p, v, 32);
 
-    for (let i = 0; i < 16; i++) {
-        let p = p5.Vector.random2D();
+    for (let i = 0; i < 8; i++) {
+        let p = createVector(i * 32 + 100, 0);
         let v = p.copy();
-        v.setMag(5);
-        p.setMag(random(inside, outside));
+        v.setMag(i * 0.5 + 1);
         v.rotate(PI / 2);
         let m = random(1, 4);
         movers.push(new Mover(p, v, m));
@@ -52,7 +48,7 @@ function Mover(pos, vel, mass) {
     this.vel = vel;
     this.acc = createVector(0, 0);
     this.mass = mass;
-    this.r = sqrt(mass) * 10;
+    this.r = sqrt(mass) * 4;
     this.hslValue = map(this.mass, 1, 10, 50, 10);
 
     this.render = () => {
