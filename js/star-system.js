@@ -6,7 +6,7 @@ function setup() {
 
     let p = createVector(0, 0);
     let v = createVector(0, 0);
-    sun = new Mover(p, v, 32);
+    sun = new Mover(p, v, 32, {h: 50, s: 100, l: 70});
 
     for (let i = 0; i < 8; i++) {
         let p = createVector(i * 32 + 100, 0);
@@ -14,7 +14,12 @@ function setup() {
         v.setMag(i * 0.5 + 1);
         v.rotate(PI / 2);
         let m = random(1, 4);
-        movers.push(new Mover(p, v, m));
+        let hsl = {
+            h: i * 36,
+            s: random(50, 100),
+            l: random(40, 60)
+        }
+        movers.push(new Mover(p, v, m, hsl));
     }
 
     colorMode(HSL, 360, 100, 100, 1);
@@ -24,8 +29,7 @@ function draw() {
     background(0, 0, 15);
 
     translate(width / 2, height / 2);
-    fill(42, 100, 50);
-    circle(sun.pos.x, sun.pos.y, sun.r * 2);
+    sun.render();
 
     movers.forEach(mover => {
         mover.render();
@@ -43,17 +47,17 @@ function draw() {
 
 // adapted from The Nature of Code by Daniel Shiffman
 
-function Mover(pos, vel, mass) {
+function Mover(pos, vel, mass, hsl) {
     this.pos = pos;
     this.vel = vel;
     this.acc = createVector(0, 0);
     this.mass = mass;
     this.r = sqrt(mass) * 4;
-    this.hslValue = map(this.mass, 1, 10, 50, 10);
+    this.hsl = hsl;
 
     this.render = () => {
         noStroke();
-        fill(128, 100, this.hslValue);
+        fill(this.hsl.h, this.hsl.s, this.hsl.l);
         circle(this.pos.x, this.pos.y, this.r * 2);
     }
 
