@@ -26,7 +26,7 @@ function setup() {
 }
 
 function draw() {
-    background(0, 0, 15);
+    background(0, 0, 15, 0.1);
 
     translate(width / 2, height / 2);
     sun.render();
@@ -42,7 +42,7 @@ function draw() {
                 mover.attract(movers[i]);
             }
         }
-    })
+    });
 }
 
 // adapted from The Nature of Code by Daniel Shiffman
@@ -81,7 +81,7 @@ function Mover(pos, vel, mass, hsl) {
         mover.applyForce(force);
     }
 
-    this.friction = () => {
+    /*this.friction = () => {
         let altitude = height - (this.pos.y + this.r);
         if (altitude < 1) {
             let friction = this.vel.copy();
@@ -92,9 +92,9 @@ function Mover(pos, vel, mass, hsl) {
             friction.setMag(coefficient * normal);
             this.applyForce(friction);
         }
-    }
+    }*/
 
-    this.contain = () => {
+    /*this.contain = () => {
         if (this.pos.x - this.r < 0) {
             this.pos.x = this.r;
             this.vel.x *= -1;
@@ -114,5 +114,5 @@ function Mover(pos, vel, mass, hsl) {
             this.pos.y = height - this.r;
             this.vel.y *= -1;
         }
-    }
+    }*/
 }
