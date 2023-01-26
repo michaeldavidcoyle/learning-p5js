@@ -12,10 +12,19 @@ function draw() {
     rectMode(CENTER);
     translate(width / 2, height / 2);
     rotate(angle);
-    noStroke();
-    fill(0, 128, 64);
-    rect(0, 0, width * 0.8, height / 16);
+
+    arrow();
 
     angle += angleVelocity;
     angleVelocity += angleAcceleration;
+}
+
+function arrow() {
+    let w = width * 0.8;
+    let h = height / 32;
+    let end = w / 2;
+    noStroke();
+    fill(223, 64, 32);
+    rect(0, 0, w, h);
+    triangle(end + h, 0, end - h, h, end - h, -h);
 }
