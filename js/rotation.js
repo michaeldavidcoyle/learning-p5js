@@ -1,6 +1,7 @@
 let angle = 0;
-let angleVelocity = 0.001;
+let angleVelocity = 1.5;
 let angleAcceleration = 0.0002;
+let friction = 0.99;
 
 function setup() {
     createCanvas(400, 400);
@@ -16,7 +17,10 @@ function draw() {
     arrow();
 
     angle += angleVelocity;
-    angleVelocity += angleAcceleration;
+    // angleVelocity += angleAcceleration;
+
+    // friction
+    angleVelocity *= friction;
 }
 
 function arrow() {
