@@ -1,26 +1,31 @@
 let angle = 0;
-let angleVelocity = 1.5;
+let angleVelocity = 0;
 let angleAcceleration = 0.0002;
 let friction = 0.99;
 
 function setup() {
     createCanvas(400, 400);
+    rectMode(CENTER);
 }
 
 function draw() {
     background(223);
 
-    rectMode(CENTER);
     translate(width / 2, height / 2);
     rotate(angle);
 
     arrow();
 
-    angle += angleVelocity;
-    // angleVelocity += angleAcceleration;
+    if (mouseIsPressed) {
+        angle = atan2(mouseY - height / 2, mouseX - width / 2);
+        angleVelocity = dist(mouseX, mouseY, pmouseX, pmouseY) / 100;
+    } else {
+        angle += angleVelocity;
+        // angleVelocity += angleAcceleration;
 
-    // friction
-    angleVelocity *= friction;
+        // friction
+        angleVelocity *= friction;
+    }
 }
 
 function arrow() {
