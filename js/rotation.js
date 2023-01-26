@@ -16,15 +16,7 @@ function draw() {
     background(223);
 
     translate(width / 2, height / 2);
-    // draw colored pie wedges
-    for (
-        let start = 0, stop = turn;
-        start < TAU, stop <= TAU;
-        start += turn, stop += turn
-    ) {
-        fill(degrees(start), 100, 48);
-        arc(0, 0, arcW, arcW, start, stop);
-    }
+    wedges();
     rotate(angle);
 
     arrow();
@@ -49,4 +41,14 @@ function arrow() {
     fill(0, 0, 20);
     rect(0, 0, w, h);
     triangle(end + h, 0, end - h, h, end - h, -h);
+}
+
+function wedges() {
+    // draw colored pie wedges
+    let stop = turn;
+    for (let start = 0; start < TAU; start += turn) {
+        fill(degrees(start), 100, 48);
+        arc(0, 0, arcW, arcW, start, stop);
+        stop += turn;
+    }
 }
