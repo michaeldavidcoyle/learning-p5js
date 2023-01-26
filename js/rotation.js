@@ -13,7 +13,7 @@ function setup() {
 }
 
 function draw() {
-    background(223);
+    background(0, 0, 60);
 
     translate(width / 2, height / 2);
     wedges();
