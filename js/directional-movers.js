@@ -29,7 +29,7 @@ function draw() {
     background(0, 0, 15, 0.1);
 
     translate(width / 2, height / 2);
-    sun.render();
+    // sun.render();
 
     movers.forEach(mover => {
         mover.render();
@@ -55,8 +55,8 @@ function Mover(pos, vel, mass, hsl) {
     this.r = sqrt(mass) * 4;
     this.hsl = hsl;
     this.angle = 0;
-    this.angleV = 0;
-    this.angleA = 0.001;
+    // this.angleV = 0;
+    // this.angleA = 0.001;
 
     this.render = () => {
         noStroke();
@@ -65,7 +65,7 @@ function Mover(pos, vel, mass, hsl) {
         push();
         translate(this.pos.x, this.pos.y);
         rotate(this.angle);
-        triangle(-this.r, this.r, -this.r, -this.r, this.r, 0);
+        triangle(-this.r, this.r / 2, -this.r, -this.r / 2, this.r, 0);
         pop();
     }
 
@@ -73,8 +73,7 @@ function Mover(pos, vel, mass, hsl) {
         this.vel.add(this.acc);
         this.pos.add(this.vel);
 
-        this.angle += this.angleV;
-        this.angleV += this.angleA;
+        this.angle = this.vel.heading();
 
         this.acc.set(0, 0);
     }
