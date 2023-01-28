@@ -56,20 +56,26 @@ function Mover(pos, vel, mass, hsl) {
     this.hsl = hsl;
     this.angle = 0;
     this.angleV = 0;
-    this.angleA = 0;
+    this.angleA = 0.001;
 
     this.render = () => {
         noStroke();
         fill(this.hsl.h, this.hsl.s, this.hsl.l);
 
+        push();
         translate(this.pos.x, this.pos.y);
         rotate(this.angle);
         triangle(-this.r, this.r, -this.r, -this.r, this.r, 0);
+        pop();
     }
 
     this.update = () => {
         this.vel.add(this.acc);
         this.pos.add(this.vel);
+
+        this.angle += this.angleV;
+        this.angleV += this.angleA;
+
         this.acc.set(0, 0);
     }
 
