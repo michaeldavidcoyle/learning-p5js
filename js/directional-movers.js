@@ -13,7 +13,7 @@ function setup() {
         let v = p.copy();
         v.setMag(i * 0.5 + 1);
         v.rotate(PI / 2);
-        let m = random(1, 4);
+        let m = 7;
         let hsl = {
             h: i * 36,
             s: random(50, 100),
@@ -38,9 +38,9 @@ function draw() {
         for (let i = 0; i < movers.length; i++) {
             sun.attract(mover);
 
-            if (mover !== movers[i]) {
-                mover.attract(movers[i]);
-            }
+            // if (mover !== movers[i]) {
+            //     mover.attract(movers[i]);
+            // }
         }
     });
 }
