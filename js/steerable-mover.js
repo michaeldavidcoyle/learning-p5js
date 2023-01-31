@@ -48,10 +48,10 @@ function Mover(pos, vel, mass, hsl) {
     }
 
     this.update = () => {
-        this.vel.add(this.acc);
+        // this.vel.add(this.acc);
+        this.vel = p5.Vector.fromAngle(this.angle);
         this.pos.add(this.vel);
 
-        this.angle = this.vel.heading();
 
         this.acc.set(0, 0);
     }
