@@ -19,6 +19,13 @@ function setup() {
 function draw() {
     background(0, 0, 15, 0.1);
 
+    let deltaAngle = PI / 64;
+    if (keyIsDown(LEFT_ARROW)) {
+        mover.angle -= deltaAngle;
+    } else if (keyIsDown(RIGHT_ARROW)) {
+        mover.angle += deltaAngle;
+    }
+
     mover.render();
     mover.update();
 }
@@ -51,7 +58,6 @@ function Mover(pos, vel, mass, hsl) {
         // this.vel.add(this.acc);
         this.vel = p5.Vector.fromAngle(this.angle);
         this.pos.add(this.vel);
-
 
         this.acc.set(0, 0);
     }
