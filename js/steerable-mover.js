@@ -57,6 +57,10 @@ function Mover(pos, vel, mass, hsl) {
     this.update = () => {
         // this.vel.add(this.acc);
         this.vel = p5.Vector.fromAngle(this.angle);
+        // thruster
+        if (keyIsDown(UP_ARROW)) {
+            this.vel.mult(3);
+        }
         this.pos.add(this.vel);
 
         this.acc.set(0, 0);
