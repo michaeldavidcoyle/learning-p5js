@@ -6,6 +6,7 @@
     <style>
         body {
             margin: 0;
+            font-family: Helvetica, sans-serif;
         }
 
         .controls {
@@ -13,11 +14,17 @@
             display: flex;
         }
 
-        .controls-side-count,
-        .controls-radius,
-        .controls-start-angle {
+        .controls-input {
+            display: flex;
+            flex-direction: column;
             margin: 0.5em;
             padding: 0.25em;
+        }
+
+        .controls-input > * {
+            /*justify-content: center;*/
+            /*align-items: center;*/
+            padding-right: 0.25em;
         }
     </style>
     <script src="js/p5.js" defer></script>
@@ -25,20 +32,33 @@
 </head>
 <body>
 <div class="controls">
-    <div class="controls-side-count">
+    <div class="controls-side-count controls-input">
         <label for="side-count">side count</label>
         <input type="number" id="side-count" name="side-count" value="3" min="3" max="360"
                step="1"></input>
     </div>
-    <div class="controls-radius">
+    <div class="controls-radius controls-input">
         <label for="radius">radius</label>
         <input type="number" id="radius" name="radius" value="100" min="2" max="1000"
                step="1"></input>
     </div>
-    <div class="controls-start-angle">
+    <div class="controls-start-angle controls-input">
         <label for="start-angle">start angle</label>
         <input type="number" id="start-angle" name="start-angle" value="0" min="-90" max="90"
                step="1"></input>
+    </div>
+    <div class="controls-stroke-weight controls-input">
+        <label for="stroke-weight">stroke weight</label>
+        <input type="number" id="stroke-weight" name="stroke-weight" value="1" min="1" max="16"
+               step="1"></input>
+    </div>
+    <div class="controls-stroke-color controls-input">
+        <label for="stroke-color">stroke color</label>
+        <input type="color" id="stroke-color" name="stroke-color" value="#000"></input>
+    </div>
+    <div class="controls-fill-color controls-input">
+        <label for="fill-color">fill color</label>
+        <input type="color" id="fill-color" name="fill-color" value="#fff"></input>
     </div>
 </div>
 </body>
