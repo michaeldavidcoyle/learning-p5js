@@ -35,8 +35,12 @@ function coordinates(origin, radius, angle) {
 function polygon(sides, start, radius) {
     stop = start + TAU;
     step = TAU / sides;
-    strokeWeight(thickness);
-    stroke(strokeColor);
+    if (thickness == 0) {
+        noStroke();
+    } else {
+        strokeWeight(thickness);
+        stroke(strokeColor);
+    }
     fill(fillColor);
     beginShape();
     for (let angle = start; angle < stop; angle += step) {
