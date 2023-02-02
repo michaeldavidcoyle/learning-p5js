@@ -1,12 +1,18 @@
 const sidesInput = document.querySelector('#side-count');
 const radiusInput = document.querySelector('#radius');
 const angleInput = document.querySelector('#start-angle');
+const strokeWeightInput = document.querySelector('#stroke-weight');
+const strokeColorInput = document.querySelector('#stroke-color');
+const fillColorInput = document.querySelector('#fill-color');
 
-let start = 0;
+let start = angleInput.value;
 let stop;
-let sideCount = 3;
+let sideCount = sidesInput.value;
 let step;
-let radius;
+let radius = radiusInput.value;
+let thickness = strokeWeightInput.value;
+let strokeColor = '#000';
+let fillColor = '#fff';
 
 function setup() {
     const controlHeight = document.querySelector('.controls').clientHeight;
@@ -29,6 +35,9 @@ function coordinates(origin, radius, angle) {
 function polygon(sides, start, radius) {
     stop = start + TAU;
     step = TAU / sides;
+    strokeWeight(thickness);
+    stroke(strokeColor);
+    fill(fillColor);
     beginShape();
     for (let angle = start; angle < stop; angle += step) {
         let p = coordinates(
@@ -51,4 +60,16 @@ radiusInput.addEventListener('change', event => {
 
 angleInput.addEventListener('change', event => {
     start = event.target.value;
+});
+
+strokeWeightInput.addEventListener('change', event => {
+    thickness = event.target.value;
+});
+
+strokeColorInput.addEventListener('change', event => {
+    strokeColor = event.target.value;
+});
+
+fillColorInput.addEventListener('change', event => {
+    fillColor = event.target.value;
 });
