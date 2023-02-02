@@ -9,7 +9,8 @@ let step;
 let radius;
 
 function setup() {
-    createCanvas(innerWidth, innerHeight * 0.75);
+    const controlHeight = document.querySelector('.controls').clientHeight;
+    createCanvas(innerWidth, innerHeight - controlHeight);
     radius = 100;
 }
 
