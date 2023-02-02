@@ -1,3 +1,7 @@
+const sidesInput = document.querySelector('#side-count');
+const radiusInput = document.querySelector('#radius');
+const angleInput = document.querySelector('#start-angle');
+
 let start = -Math.PI / 2;
 let stop;
 let sideCount = 5;
@@ -32,3 +36,15 @@ function coordinates(origin, radius, angle) {
         y: origin.y + sin(angle) * radius
     }
 }
+
+sidesInput.addEventListener('change', event => {
+    console.log(`sides: ${event.target.value}`);
+});
+
+radiusInput.addEventListener('change', event => {
+    console.log(`radius: ${event.target.value}`);
+});
+
+angleInput.addEventListener('change', event => {
+    console.log(`angle: ${event.target.value}`);
+});
