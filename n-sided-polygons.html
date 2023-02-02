@@ -10,56 +10,90 @@
         }
 
         .controls {
-            padding: 0.5em;
+            padding: 0 0.5em;
             display: flex;
         }
 
         .controls-input {
+            font-size: 0.8em;
             display: flex;
             flex-direction: column;
-            margin: 0.5em;
+            justify-content: center;
             padding: 0.25em;
         }
 
+        .controls-info {
+            font-size: 0.8em;
+            margin: 0.5em 0 0 0.5em;
+            padding: 0.5em 0 0 0.5em;
+        }
+
         .controls-input > * {
-            /*justify-content: center;*/
-            /*align-items: center;*/
             padding-right: 0.25em;
+        }
+
+        .controls-input input {
+            width: 10vw;
+        }
+
+        .controls-input > button {
+            padding: 0.75em;
+            background-color: hsl(225, 95%, 60%);
+            color: #fff;
+            border: transparent;
+            border-radius: 0.5em;
+            width: 12vw;
         }
     </style>
     <script src="js/p5.js" defer></script>
     <script src="js/n-sided-polygons.js" defer></script>
 </head>
 <body>
-<div class="controls">
+<div class="controls-info">
+    Set shape center by clicking on canvas or using x and y inputs. Use the inputs below to set size, rotation angle, color, etc.
+</div>
+<form action="n-sided-polygons.html" class="controls">
+    <div class="controls-center controls-input">
+        <div>
+            <label for="center-x">x</label>
+            <input type="number" id="center-x" name="center-x" value="100" step="1">
+        </div>
+        <div>
+            <label for="center-y">y</label>
+            <input type="number" id="center-y" name="center-y" value="100" step="1">
+        </div>
+    </div>
     <div class="controls-side-count controls-input">
         <label for="side-count">side count</label>
         <input type="number" id="side-count" name="side-count" value="3" min="3" max="360"
-               step="1"></input>
+               step="1">
     </div>
     <div class="controls-radius controls-input">
         <label for="radius">radius</label>
         <input type="number" id="radius" name="radius" value="100" min="2" max="1000"
-               step="1"></input>
+               step="1">
     </div>
     <div class="controls-start-angle controls-input">
         <label for="start-angle">start angle</label>
         <input type="number" id="start-angle" name="start-angle" value="0" min="-90" max="90"
-               step="1"></input>
+               step="1">
     </div>
     <div class="controls-stroke-weight controls-input">
         <label for="stroke-weight">stroke weight</label>
         <input type="number" id="stroke-weight" name="stroke-weight" value="1" min="0" max="100"
-               step="1"></input>
+               step="1">
     </div>
     <div class="controls-stroke-color controls-input">
         <label for="stroke-color">stroke color</label>
-        <input type="color" id="stroke-color" name="stroke-color" value="#000"></input>
+        <input type="color" id="stroke-color" name="stroke-color" value="#000">
     </div>
     <div class="controls-fill-color controls-input">
         <label for="fill-color">fill color</label>
-        <input type="color" id="fill-color" name="fill-color" value="#fff"></input>
+        <input type="color" id="fill-color" name="fill-color" value="#fff">
     </div>
-</div>
+    <div class="controls-input">
+        <button type="submit">Add Shape</button>
+    </div>
+</form>
 </body>
 </html>
