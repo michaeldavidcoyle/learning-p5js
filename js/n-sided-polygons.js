@@ -5,7 +5,7 @@ let step;
 let radius;
 
 function setup() {
-    createCanvas(window.innerWidth, window.innerHeight);
+    createCanvas(innerWidth, innerHeight * 0.75);
     stop = start + TAU;
     radius = min(width, height) / 3;
     step = TAU / sideCount;
