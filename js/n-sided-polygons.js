@@ -1,3 +1,6 @@
+const form = document.querySelector('form');
+const xInput = document.querySelector('#center-x');
+const yInput = document.querySelector('#center-y');
 const sidesInput = document.querySelector('#side-count');
 const radiusInput = document.querySelector('#radius');
 const angleInput = document.querySelector('#start-angle');
@@ -5,14 +8,7 @@ const strokeWeightInput = document.querySelector('#stroke-weight');
 const strokeColorInput = document.querySelector('#stroke-color');
 const fillColorInput = document.querySelector('#fill-color');
 
-let start = angleInput.value;
-let stop;
-let sideCount = sidesInput.value;
-let step;
-let radius = radiusInput.value;
-let thickness = strokeWeightInput.value;
-let strokeColor = '#000';
-let fillColor = '#fff';
+const shapes = [];
 
 function setup() {
     const controlHeight = document.querySelector('.controls').clientHeight;
@@ -22,7 +18,7 @@ function setup() {
 
 function draw() {
     background(223);
-    polygon(sideCount, radians(start), radius);
+    shapes.forEach(shape => shape.render());
 }
 
 function coordinates(origin, radius, angle) {
@@ -32,48 +28,52 @@ function coordinates(origin, radius, angle) {
     }
 }
 
-function polygon(sides, start, radius) {
-    stop = start + TAU;
-    step = TAU / sides;
-    if (thickness == 0) {
-        noStroke();
-    } else {
-        strokeWeight(thickness);
-        stroke(strokeColor);
+function Polygon(center, sides, radius, start, sWeight, sColor, fColor) {
+    this.center = center;
+    this.sides = sides;
+    this.radius = radius;
+    this.start = start;
+    this.sWeight = sWeight;
+    this.sColor = sColor;
+    this.fColor = fColor;
+
+    this.render = () => {
+        let stop = this.start + TAU;
+        let step = TAU / this.sides;
+        if (this.sWeight == 0) {
+            noStroke();
+        } else {
+            strokeWeight(this.sWeight);
+            stroke(this.sColor);
+        }
+        fill(this.fColor);
+        beginShape();
+        for (let angle = this.start; angle < stop; angle += step) {
+            let p = coordinates(
+                {x: this.center.x, y: this.center.y},
+                this.radius,
+                angle
+            );
+            vertex(p.x, p.y);
+        }
+        endShape(CLOSE);
     }
-    fill(fillColor);
-    beginShape();
-    for (let angle = start; angle < stop; angle += step) {
-        let p = coordinates(
-            {x: width / 2, y: height / 2},
-            radius,
-            angle
-        );
-        vertex(p.x, p.y);
-    }
-    endShape(CLOSE);
 }
 
-sidesInput.addEventListener('change', event => {
-    sideCount = event.target.value;
-});
+form.addEventListener('submit', () => {
+    event.preventDefault();
+    let center = {
+            x: +xInput.value,
+            y: +yInput.value
+        },
+        sides = +sidesInput.value,
+        radius = +radiusInput.value,
+        start = radians(+angleInput.value),
+        sWeight = +strokeWeightInput.value,
+        sColor = strokeColorInput.value,
+        fColor = fillColorInput.value;
 
-radiusInput.addEventListener('change', event => {
-    radius = event.target.value;
-});
-
-angleInput.addEventListener('change', event => {
-    start = event.target.value;
-});
-
-strokeWeightInput.addEventListener('change', event => {
-    thickness = event.target.value;
-});
-
-strokeColorInput.addEventListener('change', event => {
-    strokeColor = event.target.value;
-});
-
-fillColorInput.addEventListener('change', event => {
-    fillColor = event.target.value;
+    let shape = new Polygon(center, sides, radius, start, sWeight, sColor, fColor);
+    console.log(shape);
+    shapes.push(shape);
 });
