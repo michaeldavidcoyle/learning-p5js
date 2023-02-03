@@ -74,6 +74,5 @@ form.addEventListener('submit', () => {
         fColor = fillColorInput.value;
 
     let shape = new Polygon(center, sides, radius, start, sWeight, sColor, fColor);
-    console.log(shape);
     shapes.push(shape);
 });
