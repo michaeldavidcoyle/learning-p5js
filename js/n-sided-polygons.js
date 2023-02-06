@@ -7,13 +7,18 @@ const angleInput = document.querySelector('#start-angle');
 const strokeWeightInput = document.querySelector('#stroke-weight');
 const strokeColorInput = document.querySelector('#stroke-color');
 const fillColorInput = document.querySelector('#fill-color');
+const controlWidth = document.querySelector('.controls').clientWidth;
+const controlHeight = document.querySelector('.controls').clientHeight;
 
 const shapes = [];
 
 function setup() {
-    const controlHeight = document.querySelector('.controls').clientHeight;
-    createCanvas(innerWidth, innerHeight - controlHeight);
-    radius = 100;
+    const canvas = windowWidth > windowHeight ? (
+        createCanvas(windowWidth - controlWidth, windowHeight)
+    ) : (
+        createCanvas(windowWidth, windowHeight - controlHeight)
+    );
+    canvas.parent('canvas-container');
 }
 
 function draw() {
