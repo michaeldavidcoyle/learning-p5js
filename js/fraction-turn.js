@@ -2,6 +2,7 @@
 // https://www.youtube.com/watch?v=sj8Sg8qnjOg
 
 const fractionInput = document.querySelector('#fraction');
+const stepInput = document.querySelector('#step');
 const seedSizeInput = document.querySelector('#seed-size');
 const finalRadiusInput = document.querySelector('#final-radius');
 
@@ -61,4 +62,8 @@ seedSizeInput.addEventListener('change', event => {
 finalRadiusInput.addEventListener('change', event => {
     setFactors(fractionInput.value, seedSizeInput.value, event.target.value);
     redraw();
+});
+
+stepInput.addEventListener('change', event => {
+    fractionInput.step = event.target.value;
 });
