@@ -2,9 +2,11 @@
 // https://www.youtube.com/watch?v=sj8Sg8qnjOg
 
 const fractionInput = document.querySelector('#fraction');
-const stepInput = document.querySelector('#step');
 const seedSizeInput = document.querySelector('#seed-size');
 const finalRadiusInput = document.querySelector('#final-radius');
+const increaseInput = document.querySelector('#increase');
+const decreaseInput = document.querySelector('#decrease');
+const stepDisplay = document.querySelector('#step-display');
 
 const midpoint = {
     x: null,
@@ -64,6 +66,20 @@ finalRadiusInput.addEventListener('change', event => {
     redraw();
 });
 
-stepInput.addEventListener('change', event => {
-    fractionInput.step = event.target.value;
+increaseInput.addEventListener('click', () => {
+    let step = fractionInput.step;
+    if (step < 0.1) {
+        step = step.replace('01', '1');
+    }
+    fractionInput.step = step;
+    stepDisplay.innerText = step;
+});
+
+decreaseInput.addEventListener('click', () => {
+   let step = fractionInput.step;
+   if (step > 0.000001) {
+       step = step.replace('1', '01');
+   }
+   fractionInput.step = step;
+   stepDisplay.innerText = step;
 });
