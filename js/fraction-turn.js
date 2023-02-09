@@ -1,7 +1,6 @@
 // Inspired by Numberphile's The Golden Ratio (why it is so irrational)
 // https://www.youtube.com/watch?v=sj8Sg8qnjOg
 
-const form = document.querySelector('form');
 const fractionInput = document.querySelector('#fraction');
 const seedSizeInput = document.querySelector('#seed-size');
 const finalRadiusInput = document.querySelector('#final-radius');
@@ -49,8 +48,17 @@ function setFactors(fraction, size, finalRadius) {
     end = finalRadius;
 }
 
-form.addEventListener('submit', event => {
-   event.preventDefault();
-   setFactors(fractionInput.value, seedSizeInput.value, finalRadiusInput.value);
+fractionInput.addEventListener('change', event => {
+   setFactors(event.target.value, seedSizeInput.value, finalRadiusInput.value);
    redraw();
+});
+
+seedSizeInput.addEventListener('change', event => {
+    setFactors(fractionInput.value, event.target.value, finalRadiusInput.value);
+    redraw();
+});
+
+finalRadiusInput.addEventListener('change', event => {
+    setFactors(fractionInput.value, seedSizeInput.value, event.target.value);
+    redraw();
 });
