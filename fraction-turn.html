@@ -3,13 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="css/fraction-turn.css">
     <title>Fractional Turns</title>
-    <style>
-        body {
-            margin: 0;
-        }
-    </style>
     <script src="js/p5.js" defer></script>
     <script src="js/fraction-turn.js" defer></script>
 </head>
@@ -19,20 +14,26 @@
         <div class="controls-info">
             Use the inputs below to set the fraction to turn before plotting the next seed, the seed size and final radius.
         </div>
-        <div class="controls-fraction controls-input">
-            <label for="fraction">fraction</label>
-            <input type="number" id="fraction" name="fraction" value="0" min="0" max="1" step="0.000001">
-            <input id="increase" type="button" value="&uarr;">
-            <input id="decrease" type="button" value="&darr;">
-            <label for="increase">step: <span id="step-display">0.000001</span></label>
-        </div>
-        <div class="controls-seed-size controls-input">
-            <label for="max-seed-size">seed size</label>
-            <input type="number" id="max-seed-size" name="max-seed-size" value="4" min="1" max="100" step="1">
-        </div>
-        <div class="controls-final-radius controls-input">
-            <label for="final-radius">final radius</label>
-            <input type="number" id="final-radius" name="final-radius" value="100" step="1">
+        <div class="control-panel">
+            <div class="controls-fraction controls-input">
+                <div class="fraction-inner">
+                    <label for="fraction">fraction</label>
+                    <input type="number" id="fraction" name="fraction" value="0" min="0" max="1" step="0.000001">
+                </div>
+                <div>
+                    <input id="increase" type="button" value="&uarr;">
+                    <input id="decrease" type="button" value="&darr;">
+                    <label for="increase">step: <span id="step-display">0.000001</span></label>
+                </div>
+            </div>
+            <div class="controls-seed-size controls-input">
+                <label for="max-seed-size">max seed size</label>
+                <input type="number" id="max-seed-size" name="max-seed-size" value="16" min="1" max="100" step="1">
+            </div>
+            <div class="controls-final-radius controls-input">
+                <label for="final-radius">final radius</label>
+                <input type="number" id="final-radius" name="final-radius" value="100" step="1">
+            </div>
         </div>
     </div>
     <div id="canvas-container"></div>
