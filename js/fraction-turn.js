@@ -8,6 +8,9 @@ const increaseInput = document.querySelector('#increase');
 const decreaseInput = document.querySelector('#decrease');
 const stepDisplay = document.querySelector('#step-display');
 
+const controlWidth = document.querySelector('.controls').clientWidth;
+const controlHeight = document.querySelector('.controls').clientHeight;
+
 const midpoint = {
     x: null,
     y: null
@@ -21,7 +24,13 @@ let maxSeedSize,
     end;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    const canvas = windowWidth > windowHeight ? (
+        createCanvas(windowWidth - controlWidth, windowHeight)
+    ) : (
+        createCanvas(windowWidth, windowHeight - controlHeight)
+    );
+    canvas.parent('canvas-container');
+
     midpoint.x = width / 2;
     midpoint.y = height / 2;
     angle = 0;
