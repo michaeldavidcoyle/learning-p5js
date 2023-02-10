@@ -2,7 +2,7 @@
 // https://www.youtube.com/watch?v=sj8Sg8qnjOg
 
 const fractionInput = document.querySelector('#fraction');
-const seedSizeInput = document.querySelector('#seed-size');
+const seedSizeInput = document.querySelector('#max-seed-size');
 const finalRadiusInput = document.querySelector('#final-radius');
 const increaseInput = document.querySelector('#increase');
 const decreaseInput = document.querySelector('#decrease');
@@ -13,7 +13,7 @@ const midpoint = {
     y: null
 }
 
-let seedSize,
+let maxSeedSize,
     angle,
     radius,
     factor,
@@ -37,6 +37,7 @@ function draw() {
         x = midpoint.x + sin(angle) * radius;
         y = midpoint.y + cos(angle) * radius;
 
+        let seedSize = map(radius, 0, end, 1, maxSeedSize);
         circle(x, y, seedSize);
 
         angle += turn;
@@ -47,7 +48,7 @@ function draw() {
 function setFactors(fraction, size, finalRadius) {
     factor = fraction;
     turn = TAU * factor;
-    seedSize = size;
+    maxSeedSize = size;
     end = finalRadius;
 }
 
