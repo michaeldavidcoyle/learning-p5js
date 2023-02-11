@@ -42,6 +42,7 @@ function setup() {
 
 function draw() {
     background(198, 165, 133);
+    angle = 0;
     for (let radius = 0; radius < end; radius += 0.1) {
         x = midpoint.x + sin(angle) * radius;
         y = midpoint.y + cos(angle) * radius;
