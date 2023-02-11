@@ -47,16 +47,20 @@ input[type="number"] {
         padding: 1rem;
     }
 
+    .controls-input {
+        width: 90%;
+    }
+
     .control-panel {
         flex-direction: column;
     }
 
     input[type=number] {
-        width: 20vw;
+        width: 100%;
     }
 
     .controls-info {
-        width: 25vw;
+        width: 100%;
     }
 
     .controls-fraction,
