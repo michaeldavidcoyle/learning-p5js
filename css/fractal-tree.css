@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+.control-panel {
+    height: 5vh;
+    padding: 1rem;
+}
+
+.controls {
+    display: flex;
+}
+
+.controls-info {
+    padding-bottom: 0.5rem;
+}
+
+.controls-input {
+    padding-right: 0.5rem;
+}
+
+#canvas-container {
+    height: 95vh;
+}

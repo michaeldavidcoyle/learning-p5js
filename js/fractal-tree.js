@@ -8,7 +8,9 @@ let lengthFactor;
 let weightFactor;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    const canvas = createCanvas(windowWidth, windowHeight * 0.95);
+    canvas.parent('canvas-container');
+
     x = width / 2;
     y = height - height / 8;
     turn = radians(+branchAngleInput.value);
