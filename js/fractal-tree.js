@@ -8,8 +8,14 @@ let lengthFactor;
 let weightFactor;
 
 function setup() {
-    const canvas = createCanvas(windowWidth, windowHeight * 0.95);
+    const canvas = windowWidth > windowHeight ? (
+        createCanvas(windowWidth * 0.8, windowHeight)
+    ) : (
+        createCanvas(windowWidth, windowHeight * 0.95)
+    );
     canvas.parent('canvas-container');
+
+    console.log(width, height);
 
     x = width / 2;
     y = height - height / 8;
