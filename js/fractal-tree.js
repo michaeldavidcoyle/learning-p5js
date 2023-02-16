@@ -10,7 +10,7 @@ let weightFactor;
 function setup() {
     createCanvas(windowWidth, windowHeight);
     x = width / 2;
-    y = height - height / 10;
+    y = height - height / 8;
     turn = radians(+branchAngleInput.value);
     lengthFactor = +lengthFactorInput.value;
     weightFactor = +weightFactorInput.value;
@@ -38,3 +38,18 @@ function branch(x, y, length, angle, weight) {
         branch(endX, endY, nextLength, angleB, nextWeight);
     }
 }
+
+branchAngleInput.addEventListener('change', event => {
+    turn = radians(+event.target.value);
+    redraw();
+});
+
+lengthFactorInput.addEventListener('change', event => {
+    lengthFactor = +event.target.value;
+    redraw();
+});
+
+weightFactorInput.addEventListener('change', event => {
+    weightFactor = +event.target.value;
+    redraw();
+})
