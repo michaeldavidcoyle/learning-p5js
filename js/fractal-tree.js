@@ -1,12 +1,19 @@
-let turn = Math.PI / 6;
+const branchAngleInput = document.querySelector('#branch-angle');
+const lengthFactorInput = document.querySelector('#length-factor');
+const weightFactorInput = document.querySelector('#weight-factor');
+
+let turn;
 let x, y;
-let count = 0;
-let angleOffset = 0;
+let lengthFactor;
+let weightFactor;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     x = width / 2;
     y = height - height / 10;
+    turn = radians(+branchAngleInput.value);
+    lengthFactor = +lengthFactorInput.value;
+    weightFactor = +weightFactorInput.value;
 }
 
 function draw() {
@@ -22,12 +29,10 @@ function branch(x, y, length, angle, weight) {
     line(x, y, endX, endY);
 
     if (length > 3) {
-        let nextLength = length * random(0.67, 0.875);
-        let angleA = angle + turn * noise(angleOffset);
-        let angleB = angle - turn * noise(angleOffset);
-        let nextWeight = weight * 0.75;
-
-        angleOffset += 0.001;
+        let nextLength = length * lengthFactor;
+        let angleA = angle + turn;
+        let angleB = angle - turn;
+        let nextWeight = weight * weightFactor;
 
         branch(endX, endY, nextLength, angleA, nextWeight);
         branch(endX, endY, nextLength, angleB, nextWeight);
