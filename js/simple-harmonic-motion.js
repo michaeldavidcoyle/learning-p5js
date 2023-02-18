@@ -6,7 +6,7 @@ function setup() {
     diameter = 8;
     for (let i = 0; i < 5; i++) {
         waves.push(
-            new Wave(random(height/6), random(width/10, width/2), random(width/3))
+            new Wave(random(height/8), random(width/16, width/2), random(width/3))
         );
     }
     stroke(160, 160, 144);
