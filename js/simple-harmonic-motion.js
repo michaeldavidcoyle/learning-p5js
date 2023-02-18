@@ -3,10 +3,10 @@ let waves = [];
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    diameter = 10;
+    diameter = 8;
     for (let i = 0; i < 5; i++) {
         waves.push(
-            new Wave(random(height/4), random(width/10, width/2), random(width/3))
+            new Wave(random(height/6), random(width/10, width/2), random(width/3))
         );
     }
     stroke(160, 160, 144);
@@ -24,6 +24,10 @@ function draw() {
         });
         circle(x, y + height / 2, diameter);
     }
+
+    waves.forEach(wave => {
+        wave.update();
+    })
 }
 
 function Wave(amplitude, period, phase) {
@@ -33,5 +37,9 @@ function Wave(amplitude, period, phase) {
 
     this.evaluate = (x) => {
         return sin(this.phase + TAU * x / this.period) * this.amplitude;
+    }
+
+    this.update = () => {
+        this.phase += 0.1;
     }
 }
