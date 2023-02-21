@@ -5,6 +5,8 @@ let angleV;
 let angleA;
 let origin;
 
+let gravity = 3;
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
@@ -16,12 +18,16 @@ function setup() {
     bob = createVector();
     length = height * 0.67;
     angleV = 0;
-    angleA = 0;
+    angleA = 0.005;
     origin = createVector(width / 2, 0);
 }
 
 function draw() {
     background(223);
+
+    angleA = -(gravity * sin(angle) / length);
+    angleV += angleA;
+    angle += angleV;
 
     bob.x = length * sin(angle) + origin.x;
     bob.y = length * cos(angle) + origin.y;
