@@ -53,7 +53,15 @@ function setup() {
     );
     canvas.parent('canvas-container');
     setInitializeInputValuesAndRanges();
-    makePendulum();
+    pendulum = new Pendulum(
+        width / 2,
+        height / 2 - barLength / 2,
+        radians(startAngle),
+        barLength,
+        bobSize,
+        initialVelocity,
+        damping
+    );
 }
 
 function draw() {
@@ -82,7 +90,7 @@ function Pendulum(x, y, angle, barLength, bobSize, initialVelocity, damping) {
     this.position = createVector();
     this.barLength = barLength;
     this.bobSize = bobSize;
-    this.damping = 1 - damping;
+    this.damping = damping;
     this.barWeight = 10;
     this.bobColor = 64;
     this.angularVelocity = 0;
@@ -104,81 +112,67 @@ function Pendulum(x, y, angle, barLength, bobSize, initialVelocity, damping) {
             this.angularAcceleration = -(gravity * sin(this.angle) / this.barLength);
             this.angularVelocity += this.angularAcceleration;
             this.angle += this.angularVelocity;
-            this.angularVelocity *= this.damping;
+            this.angularVelocity *= 1 - (this.damping / 10);
         }
         this.position.x = this.barLength * sin(this.angle) + this.origin.x;
         this.position.y = this.barLength * cos(this.angle) + this.origin.y;
     }
 }
 
-function makePendulum() {
-    pendulum = new Pendulum(
-        width / 2,
-        height / 2 - barLength / 2,
-        radians(startAngle),
-        barLength,
-        bobSize,
-        initialVelocity,
-        damping
-    );
-}
-
 startAngleRange.addEventListener('input', event => {
     startAngleNumber.value = event.target.value;
-    startAngle = event.target.value;
-    makePendulum();
+    startAngle = +event.target.value;
+    pendulum.angle = startAngle;
 });
 
 startAngleNumber.addEventListener('input', event => {
     startAngleRange.value = event.target.value;
-    startAngle = event.target.value;
-    makePendulum();
+    startAngle = +event.target.value;
+    pendulum.angle = startAngle;
 });
 
 barLengthRange.addEventListener('input', event => {
     barLengthDisplay.value = event.target.value;
-    barLength = event.target.value;
-    makePendulum();
+    barLength = +event.target.value;
+    pendulum.barLength = barLength;
 });
 
 bobSizeRange.addEventListener('input', event => {
     bobSizeDisplay.value = event.target.value;
-    bobSize = event.target.value;
-    makePendulum();
+    bobSize = +event.target.value;
+    pendulum.bobSize = bobSize;
 });
 
 initialVelocityRange.addEventListener('input', event => {
     initialVelocityNumber.value = event.target.value;
-    initialVelocity = event.target.value;
-    makePendulum();
+    initialVelocity = +event.target.value;
+    pendulum.angularVelocity = initialVelocity;
 });
 
 initialVelocityNumber.addEventListener('input', event => {
     initialVelocityRange.value = event.target.value;
-    initialVelocity = event.target.value;
-    makePendulum();
+    initialVelocity = +event.target.value;
+    pendulum.angularVelocity = initialVelocity;
 });
 
 gravityRange.addEventListener('input', event => {
     gravityNumber.value = event.target.value;
-    gravity = event.target.value;
-    makePendulum();
+    gravity = +event.target.value;
 });
 
 gravityNumber.addEventListener('input', event => {
     gravityRange.value = event.target.value;
-    gravity = event.target.value;
-    makePendulum();
+    gravity = +event.target.value;
 });
 
 dampingRange.addEventListener('input', event => {
     dampingNumber.value = event.target.value;
-    damping = event.target.value;
-    makePendulum();
+    damping = +event.target.value;
+    pendulum.damping = damping;
 });
 
 dampingNumber.addEventListener('input', event => {
     dampingRange.value = event.target.value;
-    damping = event.target.value;
-    makePendulum();
+    damping = +event.target.value;
+    pendulum.damping = damping;
 });
