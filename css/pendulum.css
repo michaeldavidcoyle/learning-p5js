@@ -9,6 +9,11 @@ body {
     padding-right: 0.5rem;
 }
 
+.instructions {
+    width: 100%;
+    padding: 0.5rem;
+}
+
 .controls {
     display: flex;
     width: 50%;
