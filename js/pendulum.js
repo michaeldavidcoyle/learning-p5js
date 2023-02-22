@@ -41,8 +41,8 @@ function setInitializeInputValuesAndRanges() {
     damping = dampingRange.value = 0;
     dampingNumber.value = damping;
 
-    barLength.max = height;
-    bobSize.max = floor(min(width, height) / 4);
+    barLengthRange.max = floor(min(width, height) * 0.9);
+    bobSizeRange.max = floor(min(width, height) / 4);
 }
 
 function setup() {
@@ -135,6 +135,7 @@ barLengthRange.addEventListener('input', event => {
     barLengthDisplay.value = event.target.value;
     barLength = +event.target.value;
     pendulum.barLength = barLength;
+    pendulum.origin.y = height / 2 - barLength / 2;
 });
 
 bobSizeRange.addEventListener('input', event => {
