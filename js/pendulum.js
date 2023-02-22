@@ -3,7 +3,7 @@ let gravity = 3;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    pendulum = new Pendulum(width/2, height/5, PI/4, height/2, height/16, 8, 64);
+    pendulum = new Pendulum(width/2, height/5, PI/4, height/2, height/16, 0.9999, 8, 64);
 }
 
 function draw() {
@@ -13,12 +13,13 @@ function draw() {
     pendulum.update();
 }
 
-function Pendulum(x, y, angle, barLength, bobSize, barWeight=8, bobColor=64) {
+function Pendulum(x, y, angle, barLength, bobSize, damping=1, barWeight=8, bobColor=64) {
     this.origin = createVector(x, y);
     this.angle = angle;
     this.position = createVector();
     this.barLength = barLength;
     this.bobSize = bobSize;
+    this.damping = damping;
     this.barWeight = barWeight;
     this.bobColor = bobColor;
     this.angularVelocity = 0;
@@ -40,6 +41,7 @@ function Pendulum(x, y, angle, barLength, bobSize, barWeight=8, bobColor=64) {
             this.angularAcceleration = -(gravity * sin(this.angle) / this.barLength);
             this.angularVelocity += this.angularAcceleration;
             this.angle += this.angularVelocity;
+            this.angularVelocity *= this.damping;
         }
         this.position.x = this.barLength * sin(this.angle) + this.origin.x;
         this.position.y = this.barLength * cos(this.angle) + this.origin.y;
