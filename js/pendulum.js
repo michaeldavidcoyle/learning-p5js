@@ -70,6 +70,9 @@ function windowResized() {
     }
 
     resizeCanvas(w, h);
+
+    pendulum.origin.x = width / 2;
+    pendulum.origin.y = height / 2 - barLength / 2;
 }
 
 function Pendulum(x, y, angle, barLength, bobSize, damping) {
