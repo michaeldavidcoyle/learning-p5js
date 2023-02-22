@@ -2,7 +2,12 @@ let pendulum;
 let gravity = 3;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    const canvas = windowWidth > windowHeight ? (
+            createCanvas(windowWidth * 0.8, windowHeight)
+        ) : (
+            createCanvas(windowWidth, windowHeight * 0.85)
+    );
+    canvas.parent('canvas-container');
     pendulum = new Pendulum(width/2, height/5, PI/4, height/2, height/16, 0.9999, 8, 64);
 }
 

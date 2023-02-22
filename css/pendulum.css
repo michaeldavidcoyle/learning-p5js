@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+.control-panel {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 0.5rem;
+}
+
+.controls {
+    display: flex;
+    width: 50%;
+}
+
+.controls input {
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+.input-range,
+.input-number {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.input-range {
+    width: 75%;
+}
+
+.input-number {
+    width: 25%;
+}
+
+@media (orientation: landscape) {
+    main {
+        display: flex;
+    }
+
+    .control-panel {
+        flex-direction: column;
+        width: 20vw;
+    }
+
+    .controls {
+        width: 100%;
+    }
+}
