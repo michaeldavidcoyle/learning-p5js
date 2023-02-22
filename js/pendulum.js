@@ -96,7 +96,7 @@ function Pendulum(x, y, angle, barLength, bobSize, damping) {
     }
 
     this.update = () => {
-        if (mouseIsPressed) {
+        if (mouseY > 0 && mouseX > 0 && mouseIsPressed) {
             this.angle = atan2(mouseX - this.origin.x, mouseY - this.origin.y);
             this.angularVelocity = 0;
         } else {
