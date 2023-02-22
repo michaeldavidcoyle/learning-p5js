@@ -1,5 +1,26 @@
+const startAngleRange = document.getElementById('start-angle-range');
+const startAngleNumber = document.getElementById('start-angle-number');
+const barLengthRange = document.getElementById('bar-length');
+const barLengthDisplay = document.getElementById('bar-length-display');
+const bobSizeRange = document.getElementById('bob-size');
+const bobSizeDisplay = document.getElementById('bob-size-display');
+const initialVelocityRange = document.getElementById('initial-velocity-range');
+const initialVelocityNumber = document.getElementById('initial-velocity-number');
+const gravityRange = document.getElementById('gravity-range');
+const gravityNumber = document.getElementById('gravity-number');
+const dampingRange = document.getElementById('damping-range');
+const dampingNumber = document.getElementById('damping-number');
+
+barLengthDisplay.value = barLengthRange.value;
+bobSizeDisplay.value = bobSizeRange.value;
+
 let pendulum;
-let gravity = 3;
+let startAngle = startAngleRange.value;
+let barLength = barLengthRange.value;
+let bobSize = bobSizeRange.value;
+let initialVelocity = initialVelocityRange.value;
+let gravity = gravityRange.value;
+let damping = dampingRange.value;
 
 function setup() {
     const canvas = windowWidth > windowHeight ? (
@@ -8,7 +29,7 @@ function setup() {
             createCanvas(windowWidth, windowHeight * 0.85)
     );
     canvas.parent('canvas-container');
-    pendulum = new Pendulum(width/2, height/5, PI/4, height/2, height/16, 0.9999, 8, 64);
+    makePendulum();
 }
 
 function draw() {
@@ -31,22 +52,22 @@ function windowResized() {
     resizeCanvas(w, h);
 }
 
-function Pendulum(x, y, angle, barLength, bobSize, damping=1, barWeight=8, bobColor=64) {
+function Pendulum(x, y, angle, barLength, bobSize, initialVelocity, damping) {
     this.origin = createVector(x, y);
     this.angle = angle;
     this.position = createVector();
     this.barLength = barLength;
     this.bobSize = bobSize;
-    this.damping = damping;
-    this.barWeight = barWeight;
-    this.bobColor = bobColor;
+    this.damping = 1 - damping;
+    this.barWeight = 10;
+    this.bobColor = 64;
     this.angularVelocity = 0;
     this.angularAcceleration = 0;
 
     this.render = () => {
-        stroke(bobColor);
-        strokeWeight(barWeight);
-        fill(bobColor);
+        stroke(this.bobColor);
+        strokeWeight(this.barWeight);
+        fill(this.bobColor);
         line(this.origin.x, this.origin.y, this.position.x, this.position.y);
         circle(this.position.x, this.position.y, this.bobSize);
     }
@@ -65,3 +86,73 @@ function Pendulum(x, y, angle, barLength, bobSize, damping=1, barWeight=8, bobCo
         this.position.y = this.barLength * cos(this.angle) + this.origin.y;
     }
 }
+
+function makePendulum() {
+    pendulum = new Pendulum(
+        width / 2,
+        height / 2 - barLength / 2,
+        radians(startAngle),
+        barLength,
+        bobSize,
+        initialVelocity,
+        damping
+    );
+}
+
+startAngleRange.addEventListener('input', event => {
+    startAngleNumber.value = event.target.value;
+    startAngle = event.target.value;
+    makePendulum();
+});
+
+startAngleNumber.addEventListener('input', event => {
+    startAngleRange.value = event.target.value;
+    makePendulum();
+});
+
+barLengthRange.addEventListener('input', event => {
+    barLengthDisplay.value = event.target.value;
+    barLength = event.target.value;
+    makePendulum();
+});
+
+bobSizeRange.addEventListener('input', event => {
+    bobSizeDisplay.value = event.target.value;
+    bobSize = event.target.value;
+    makePendulum();
+});
+
+initialVelocityRange.addEventListener('input', event => {
+    initialVelocityNumber.value = event.target.value;
+    initialVelocity = event.target.value;
+    makePendulum();
+});
+
+initialVelocityNumber.addEventListener('input', event => {
+    initialVelocityRange.value = event.target.value;
+    initialVelocity = event.target.value;
+    makePendulum();
+});
+
+gravityRange.addEventListener('input', event => {
+    gravityNumber.value = event.target.value;
+    gravity = event.target.value;
+    makePendulum();
+});
+
+gravityNumber.addEventListener('input', event => {
+    gravityRange.value = event.target.value;
+    gravity = event.target.value;
+    makePendulum();
+});
+
+dampingRange.addEventListener('input', event => {
+    dampingNumber.value = event.target.value;
+    damping = event.target.value;
+    makePendulum();
+});
+
+dampingNumber.addEventListener('input', event => {
+    dampingRange.value = event.target.value;
+    makePendulum();
+});
