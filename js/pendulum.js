@@ -33,10 +33,14 @@ function Pendulum(x, y, angle, barLength, bobSize, barWeight=8, bobColor=64) {
     }
 
     this.update = () => {
-        this.angularAcceleration = -(gravity * sin(this.angle) / this.barLength);
-        this.angularVelocity += this.angularAcceleration;
-        this.angle += this.angularVelocity;
-
+        if (mouseIsPressed) {
+            this.angle = atan2(mouseX - this.origin.x, mouseY - this.origin.y);
+            this.angularVelocity = 0;
+        } else {
+            this.angularAcceleration = -(gravity * sin(this.angle) / this.barLength);
+            this.angularVelocity += this.angularAcceleration;
+            this.angle += this.angularVelocity;
+        }
         this.position.x = this.barLength * sin(this.angle) + this.origin.x;
         this.position.y = this.barLength * cos(this.angle) + this.origin.y;
     }
