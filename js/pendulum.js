@@ -122,13 +122,13 @@ function Pendulum(x, y, angle, barLength, bobSize, initialVelocity, damping) {
 startAngleRange.addEventListener('input', event => {
     startAngleNumber.value = event.target.value;
     startAngle = +event.target.value;
-    pendulum.angle = startAngle;
+    pendulum.angle = startAngle / 180 * Math.PI;
 });
 
 startAngleNumber.addEventListener('input', event => {
     startAngleRange.value = event.target.value;
     startAngle = +event.target.value;
-    pendulum.angle = startAngle;
+    pendulum.angle = startAngle / 180 * Math.PI;
 });
 
 barLengthRange.addEventListener('input', event => {
