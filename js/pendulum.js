@@ -1,11 +1,7 @@
-const startAngleRange = document.getElementById('start-angle-range');
-const startAngleNumber = document.getElementById('start-angle-number');
 const barLengthRange = document.getElementById('bar-length');
 const barLengthDisplay = document.getElementById('bar-length-display');
 const bobSizeRange = document.getElementById('bob-size');
 const bobSizeDisplay = document.getElementById('bob-size-display');
-const initialVelocityRange = document.getElementById('initial-velocity-range');
-const initialVelocityNumber = document.getElementById('initial-velocity-number');
 const gravityRange = document.getElementById('gravity-range');
 const gravityNumber = document.getElementById('gravity-number');
 const dampingRange = document.getElementById('damping-range');
@@ -15,25 +11,18 @@ barLengthDisplay.value = barLengthRange.value;
 bobSizeDisplay.value = bobSizeRange.value;
 
 let pendulum;
-let startAngle;
+let startAngle = 45;
 let barLength;
 let bobSize;
-let initialVelocity;
 let gravity;
 let damping;
 
 function setInitializeInputValuesAndRanges() {
-    startAngle = startAngleRange.value = 45;
-    startAngleNumber.value = startAngle;
-
     barLength = barLengthRange.value = floor(height / 3);
     barLengthDisplay.value = barLength;
 
     bobSize = bobSizeRange.value = floor(min(width, height) / 24);
     bobSizeDisplay.value = bobSize;
-
-    initialVelocity = initialVelocityRange.value = 0;
-    initialVelocityNumber.value = initialVelocity;
 
     gravity = gravityRange.value = 4;
     gravityNumber.value = gravity;
@@ -59,7 +48,6 @@ function setup() {
         radians(startAngle),
         barLength,
         bobSize,
-        initialVelocity,
         damping
     );
 }
@@ -84,7 +72,7 @@ function windowResized() {
     resizeCanvas(w, h);
 }
 
-function Pendulum(x, y, angle, barLength, bobSize, initialVelocity, damping) {
+function Pendulum(x, y, angle, barLength, bobSize, damping) {
     this.origin = createVector(x, y);
     this.angle = angle;
     this.position = createVector();
@@ -119,18 +107,6 @@ function Pendulum(x, y, angle, barLength, bobSize, initialVelocity, damping) {
     }
 }
 
-startAngleRange.addEventListener('input', event => {
-    startAngleNumber.value = event.target.value;
-    startAngle = +event.target.value;
-    pendulum.angle = startAngle / 180 * Math.PI;
-});
-
-startAngleNumber.addEventListener('input', event => {
-    startAngleRange.value = event.target.value;
-    startAngle = +event.target.value;
-    pendulum.angle = startAngle / 180 * Math.PI;
-});
-
 barLengthRange.addEventListener('input', event => {
     barLengthDisplay.value = event.target.value;
     barLength = +event.target.value;
@@ -142,18 +118,6 @@ bobSizeRange.addEventListener('input', event => {
     bobSizeDisplay.value = event.target.value;
     bobSize = +event.target.value;
     pendulum.bobSize = bobSize;
-});
-
-initialVelocityRange.addEventListener('input', event => {
-    initialVelocityNumber.value = event.target.value;
-    initialVelocity = +event.target.value;
-    pendulum.angularVelocity = initialVelocity;
-});
-
-initialVelocityNumber.addEventListener('input', event => {
-    initialVelocityRange.value = event.target.value;
-    initialVelocity = +event.target.value;
-    pendulum.angularVelocity = initialVelocity;
 });
 
 gravityRange.addEventListener('input', event => {
