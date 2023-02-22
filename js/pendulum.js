@@ -3,7 +3,7 @@ let gravity = 3;
 
 function setup() {
     const canvas = windowWidth > windowHeight ? (
-            createCanvas(windowWidth * 0.8, windowHeight)
+            createCanvas(windowWidth * 0.75, windowHeight)
         ) : (
             createCanvas(windowWidth, windowHeight * 0.85)
     );
@@ -16,6 +16,19 @@ function draw() {
 
     pendulum.render();
     pendulum.update();
+}
+
+function windowResized() {
+    let w, h;
+    if (windowWidth > windowHeight) {
+        w = windowWidth * 0.75;
+        h = windowHeight;
+    } else {
+        w = windowWidth;
+        h = windowHeight * 0.85;
+    }
+
+    resizeCanvas(w, h);
 }
 
 function Pendulum(x, y, angle, barLength, bobSize, damping=1, barWeight=8, bobColor=64) {
