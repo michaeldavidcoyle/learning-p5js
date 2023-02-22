@@ -15,12 +15,35 @@ barLengthDisplay.value = barLengthRange.value;
 bobSizeDisplay.value = bobSizeRange.value;
 
 let pendulum;
-let startAngle = startAngleRange.value;
-let barLength = barLengthRange.value;
-let bobSize = bobSizeRange.value;
-let initialVelocity = initialVelocityRange.value;
-let gravity = gravityRange.value;
-let damping = dampingRange.value;
+let startAngle;
+let barLength;
+let bobSize;
+let initialVelocity;
+let gravity;
+let damping;
+
+function setInitializeInputValuesAndRanges() {
+    startAngle = startAngleRange.value = 45;
+    startAngleNumber.value = startAngle;
+
+    barLength = barLengthRange.value = floor(height / 3);
+    barLengthDisplay.value = barLength;
+
+    bobSize = bobSizeRange.value = floor(min(width, height) / 24);
+    bobSizeDisplay.value = bobSize;
+
+    initialVelocity = initialVelocityRange.value = 0;
+    initialVelocityNumber.value = initialVelocity;
+
+    gravity = gravityRange.value = 4;
+    gravityNumber.value = gravity;
+
+    damping = dampingRange.value = 0;
+    dampingNumber.value = damping;
+
+    barLength.max = height;
+    bobSize.max = floor(min(width, height) / 4);
+}
 
 function setup() {
     const canvas = windowWidth > windowHeight ? (
@@ -29,6 +52,7 @@ function setup() {
             createCanvas(windowWidth, windowHeight * 0.85)
     );
     canvas.parent('canvas-container');
+    setInitializeInputValuesAndRanges();
     makePendulum();
 }
 
@@ -107,6 +131,7 @@ startAngleRange.addEventListener('input', event => {
 
 startAngleNumber.addEventListener('input', event => {
     startAngleRange.value = event.target.value;
+    startAngle = event.target.value;
     makePendulum();
 });
 
@@ -154,5 +179,6 @@ dampingRange.addEventListener('input', event => {
 
 dampingNumber.addEventListener('input', event => {
     dampingRange.value = event.target.value;
+    damping = event.target.value;
     makePendulum();
 });
