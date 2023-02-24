@@ -1,7 +1,8 @@
 let y = innerHeight / 2;
 let restLength = y;
-let k = 0.01;
+let k = 0.04;
 let velocity = 0;
+let damping = 0.999;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -27,5 +28,7 @@ function draw() {
         // Newton's Second Law (w/ mass = 1)
         velocity += force;
         y += velocity;
+
+        velocity *= damping;
     }
 }
