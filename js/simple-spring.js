@@ -1,5 +1,5 @@
-let y = innerHeight - innerHeight / 4;
-let restLength = innerHeight / 2;
+let y = innerHeight / 2;
+let restLength = y;
 let k = 0.01;
 let velocity = 0;
 
@@ -11,7 +11,7 @@ function draw() {
     background(191);
 
     stroke(96);
-    strokeWeight(10);
+    strokeWeight(8);
     line(width / 2, 0, width / 2, y);
 
     fill(96);
@@ -21,7 +21,11 @@ function draw() {
     // Hooke's Law
     let force = -k * x;
 
-    // Newton's Second Law (w/ mass = 1)
-    velocity += force;
-    y += velocity;
+    if (mouseIsPressed) {
+        y = mouseY;
+    } else {
+        // Newton's Second Law (w/ mass = 1)
+        velocity += force;
+        y += velocity;
+    }
 }
