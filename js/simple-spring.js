@@ -5,6 +5,7 @@ let restLength;
 let k = 0.05;
 let damping = 0.99;
 let r;
+let gravity;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -13,7 +14,9 @@ function setup() {
     bob = createVector(width / 2, height * 0.75);
     anchor = createVector(width / 2, 0);
     velocity = createVector(0, 0);
+    gravity = createVector(0, 1);
     r = height / 16;
+
     stroke(96);
     strokeWeight(4);
     fill(96);
@@ -39,6 +42,7 @@ function draw() {
 
     // Newton's Second Law (w/ mass = 1)
     velocity.add(force);
+    velocity.add(gravity);
     bob.add(velocity);
 
     velocity.mult(damping);
